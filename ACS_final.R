@@ -62,13 +62,14 @@ orth<-function(data,D,threshold=1e-8)
 
 Sparse_vector<-function(Y,design_matrix,nfolds=5)
 {
-  fit=cv.glmnet(x=design_matrix,y=Y,nfolds=nfolds,type.measure = "mse",lambda.min.ratio=1e-6)
+  fit=cv.glmnet(x=design_matrix,y=Y,nfolds=nfolds,lambda.min.ratio=1e-6)
   return(as.numeric(coef(fit))[-1])
 }
 
 Matrix_estimation<-function(data,ytilde,nfolds=5)
 {
-  fit<-cv.glmnet(x=data,y=ytilde,family="mgaussian",nfolds=nfolds,lambda.min.ratio=1e-5,nlambda=10000,type.measure = "mse")
+  fit<-cv.glmnet(x=data,y=ytilde,family="mgaussian",nfolds=nfolds,lambda.min.ratio=1e-1,nlambda=1000)
+  print(fit$lambda.min)
   return(coef(fit))
 }
 
@@ -151,7 +152,7 @@ ACS_SDR<-function(X, kernel_matrix, nfolds=5, D=15)
     result<-do.call(cbind,(lapply(solution_equal,deal_list)))/weight
   }
   }
-  return(list(estimate=sparse_estimate,kernel=kernel_matrix,result=result,X=X))
+  return(list(estimate=sparse_estimate,kernel=kernel_matrix,result=result,X=X,index=((c(1:num)[-index])[-index1])[index_chosen]))
 }
 
 order_determination<-function(X,Y,H=2,r=20)
@@ -183,6 +184,6 @@ order_determination<-function(X,Y,H=2,r=20)
 }
 
 
-
+solution_equal<-cv.glmnet(x=X,y=kernel_matrix,family="mgaussian",nfolds=nfolds,lambda.min.ratio=1e-5,type.measure = "mse")
 
 
