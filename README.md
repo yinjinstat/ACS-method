@@ -5,7 +5,7 @@ newest_ACS_SDR.R includes the updated code used for the main experiments, the ma
 
 SEAS.r: Jing Zeng's code for SEAS approach in paper "Subspace estimation with automatic dimension and variable selection in sufficient dimension reduction", can be also found in his github page https://github.com/jingzzeng/SEAS.
 
-GSE24417_Training_Datamatrix.csv: the predictors of the dataset used in the real data analysis.
+trainx.zip the predictors of the dataset used in the real data analysis. The transformed data from GSE24417_Training_Datamatrix, which could be downloaded at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE24417
 
 trainy.csv: the response of the dataset used in the real data analysis.
 
